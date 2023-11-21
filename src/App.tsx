@@ -1,5 +1,4 @@
-import { useEffect, useState, createContext, useContext } from 'react';
-import * as SQL from 'sql.js';
+import { useState, createContext, useContext } from 'react';
 import Home from './pages/Home/Home';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Level1 from './pages/Level1/Level1';
@@ -84,12 +83,6 @@ export function useLevel3SolvedContext() {
 }
 
 export default function App() {
-	useEffect(() => {
-		/*	// Create an SQLite database in memory
-		const db: SQL.Database = new SQL.Database();
-		const query = 'CREATE TABLE IF NOT EXISTS users (id INT, name TEXT)';
-		db.run(query);*/
-	});
 	const [tutorial_solved, set_tutorial_solved] = useState(false);
 	const [level1_solved, set_level1_solved] = useState(false);
 	const [level2_solved, set_level2_solved] = useState(false);

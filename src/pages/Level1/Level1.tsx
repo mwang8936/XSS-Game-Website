@@ -29,7 +29,7 @@ export default function Level1() {
 
 			<CenteredMessage message="Task: " /* Write Task Here */ />
 
-			{/* ADD CODE HERE  t*/}
+			{/* ADD CODE HERE */}
 
 			{level1_solved && (
 				<>

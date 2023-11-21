@@ -1,16 +1,23 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { useLevel1SolvedContext, useTutorialSolvedContext } from '../../App';
 import CenteredMessage from '../components/Message';
 import Accordion from '../components/Accoridon';
 import { secret_keys } from '../Home/Home';
 import code_snippet from '../../images/code/test.png'; //update this
+import Input from '../components/Input';
 
 export default function Tutorial() {
 	const navigate = useNavigate();
 
 	const { tutorial_solved, set_tutorial_solved } = useTutorialSolvedContext();
 	const { level1_solved } = useLevel1SolvedContext();
+
+	const actual_password = 'THIS IS MY PASSWORD!!!'; //Set password here
+	const [password, setPassword] = useState(
+		tutorial_solved ? actual_password : ''
+	);
 
 	return (
 		<div className="items-center justify-center">
@@ -28,6 +35,20 @@ export default function Tutorial() {
 			<CenteredMessage message="Task: " /* Write Task Here */ />
 
 			{/* ADD CODE HERE */}
+			<Input
+				value={password}
+				setValue={setPassword}
+				onEnter={() => {
+					if (password === actual_password) {
+						set_tutorial_solved(true);
+					} else {
+						setPassword('');
+					}
+				}}
+				buttonTitle="Submit"
+				label="Enter Password:"
+				disabled={tutorial_solved}
+			/>
 
 			{tutorial_solved && (
 				<>
