@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import {useState, useEffect} from 'react';
 import Navbar from '../components/Navbar';
 import {
 	useTutorialSolvedContext,
@@ -10,8 +11,45 @@ import CenteredMessage from '../components/Message';
 import { secret_keys } from '../Home/Home';
 import Accordion from '../components/Accoridon';
 import code_snippet from '../../images/code/test.png'; //update this
+import initSqlJs from 'sql.js';
+import { Database } from 'sql.js';
+import Input from '../components/Input';
 
 export default function Level2() {
+	const [db, setDb] = useState<Database>();
+	const [inputValue, setInputValue] = useState('');
+  
+	useEffect(() => {
+	  initSqlJs({
+		// Fetch sql.js wasm file from CDN
+		// This way, we don't need to deal with webpack
+		locateFile: (file) => `https://sql.js.org/dist/${file}`,
+	  })
+		.then((SQL) => {
+			const db = new SQL.Database();
+			db.exec(`
+			CREATE TABLE users (
+			  User VARCHAR(50),
+			  Password VARCHAR(50)
+			);
+			INSERT INTO users (User, Password) VALUES
+			  ('Alice', 'AlicePass'),
+			  ('Bob', 'BobPass'),
+			  ('Carol', 'CarolPass');`)
+			  setDb(db)
+		})
+		.catch((err) => console.log(err));
+	}, []);
+
+	const exec = (sql: string) => {
+		try {
+		  const results = db?.exec(sql);
+		  console.log(results);
+		} catch (err) {
+			console.log(err)
+		}
+	  };
+
 	const navigate = useNavigate();
 
 	const { tutorial_solved } = useTutorialSolvedContext();
@@ -36,6 +74,14 @@ export default function Level2() {
 			/>
 
 			<CenteredMessage message="Task: " /* Write Task Here */ />
+			<Input
+				value={inputValue}
+				setValue={setInputValue}
+				disabled={false}
+				onEnter={() => exec(inputValue)}
+				buttonTitle='Execute'
+				label='Execute Query'
+			/>
 
 			{/* ADD CODE HERE */}
 
