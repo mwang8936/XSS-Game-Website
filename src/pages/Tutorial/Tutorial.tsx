@@ -7,6 +7,10 @@ import Accordion from '../components/Accoridon';
 import { secret_keys } from '../Home/Home';
 import code_snippet from '../../images/code/test.png'; //update this
 import Input from '../components/Input';
+import zoom0 from '../../images/code/zoom0.png'
+import zoom1 from '../../images/code/zoom1.png'
+import zoom2 from '../../images/code/zoom2.png'
+import enhance from '../../images/code/enhance.png'
 
 export default function Tutorial() {
 	const navigate = useNavigate();
@@ -14,10 +18,11 @@ export default function Tutorial() {
 	const { tutorial_solved, set_tutorial_solved } = useTutorialSolvedContext();
 	const { level1_solved } = useLevel1SolvedContext();
 
-	const actual_password = 'THIS IS MY PASSWORD!!!'; //Set password here
+	const actual_password = 'password123'; //Set password here
 	const [password, setPassword] = useState(
 		tutorial_solved ? actual_password : ''
 	);
+	const [zoom, setZoom] = useState(0);
 
 	return (
 		<div className="items-center justify-center">
@@ -32,7 +37,20 @@ export default function Tutorial() {
 				onBackHoverMessage="No previous levels"
 				onNextHoverMessage="Complete Tutorial to unlock Level 1"
 			/>
-			<CenteredMessage message="Task: " /* Write Task Here */ />
+			<CenteredMessage message="Task:" /* Write Task Here */ />
+			<CenteredMessage message = "You are in a coffee shop working on the latest CPEN 442 assignment. Suddenly you see Joe Biden working on his laptop. 
+			You take out your telescope from your backpack that you use for impromptu star gazing and aim it at his laptop. "/>
+			<div className="flex items-center">			
+				<img src="src\images\code\better_telescope.png" className="mx-auto" />
+				<img src={zoom===0 ? zoom0 : zoom===1 ? zoom1 : zoom===2 ? zoom2 : enhance} 
+			className="mx-auto border-4 border-solid border-black" />
+			</div>
+
+			<button className="flex flex-row justify-center items-center 
+                bg-blue-500 hover:bg-blue-700 text-white disabled:bg-gray-500
+                font-bold py-2 px-4 m-3 rounded w-auto h-auto group mx-auto"
+				onClick={() => setZoom(Math.min(zoom + 1, 3))}>Zoom {zoom}x</button>
+			
 
 			{/* ADD CODE HERE */}
 			<Input
@@ -59,8 +77,8 @@ export default function Tutorial() {
 				</>
 			)}
 
-			<Accordion title="Show Code" content="" imageUrl={code_snippet} />
-			<Accordion title="Hint" content="Hint" /* Write Hint here */ />
+			{/* <Accordion title="Show Code" content="" imageUrl={code_snippet} /> */}
+			<Accordion title="Hint" content="Click the zoom button to zoom into the image further" />
 		</div>
 	);
 }
