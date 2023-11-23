@@ -5,6 +5,7 @@ interface InputProp {
 	buttonTitle: string;
 	label: string;
 	disabled: boolean;
+	hidden?: boolean;
 }
 
 export default function Input(prop: InputProp) {
@@ -32,14 +33,16 @@ export default function Input(prop: InputProp) {
 					}
 				}}
 			/>
-			<button
-				className="flex flex-row justify-center items-center 
-                bg-blue-500 hover:bg-blue-700 text-white disabled:bg-gray-500
-                font-bold py-2 px-4 m-3 rounded w-auto h-auto group"
-				disabled={prop.disabled}
-				onClick={prop.onEnter}>
-				{prop.buttonTitle}
-			</button>
+			<div hidden={prop.hidden}>
+				<button
+					className="flex flex-row justify-center items-center 
+					bg-blue-500 hover:bg-blue-700 text-white disabled:bg-gray-500
+					font-bold py-2 px-4 m-3 rounded w-auto h-auto group"
+					disabled={prop.disabled}
+					onClick={prop.onEnter}>
+					{prop.buttonTitle}
+				</button>
+			</div>
 		</div>
 	);
 }
