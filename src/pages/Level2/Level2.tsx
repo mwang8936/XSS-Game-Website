@@ -17,9 +17,9 @@ import Input from '../components/Input';
 
 export default function Level2() {
 	const [db, setDb] = useState<Database>();
-	const [inputValue, setInputValue] = useState('');
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [loginStatus, setLoginStatus] = useState('');
   
 	useEffect(() => {
 	  initSqlJs({
@@ -58,7 +58,11 @@ export default function Level2() {
 		e.preventDefault();
 		const results = exec(`SELECT * FROM users WHERE User = "${username}" AND Password = "${password}"`);
 		if(results?.length === 1) {
+			setLoginStatus('Login Successful!');
 			set_level2_solved(true);
+		}
+		else {
+			setLoginStatus('Login Failed: Incorrect username or password');
 		}
 	}
 
@@ -85,7 +89,8 @@ export default function Level2() {
 				onNextHoverMessage="Complete Level 2 to unlock Level 3"
 			/>
 
-			<CenteredMessage message="Task: " /* Write Task Here */ />
+			<CenteredMessage message="Task: You are an attacker trying to bypass this login page. You have learned that the website directly
+			inserts user input into its SQL query. Exploit this fact and try to bypass the login authentication."/>
 			{/* <Input
 				value={inputValue}
 				setValue={setInputValue}
@@ -123,6 +128,8 @@ export default function Level2() {
 					Login
 				</button>
 			</form>
+
+			<h1 className={`${loginStatus.startsWith('Login Failed') ? 'text-red-600' : 'text-green-600'} text-center`}>{loginStatus}</h1>
 
 			{/* ADD CODE HERE */}
 
