@@ -128,7 +128,11 @@ export default function Level2() {
 
 			{level2_solved && (
 				<>
-					<CenteredMessage message="Solved: Congratulations! To defend against SQL injection in this example, 
+					<CenteredMessage message="Solved: Congratulations! This attack works, because the frontend (website) 
+					allowed you to input your own data and you were able to inject your SQL Query into the web application.
+					Stealing data from our users registered in our Database" />
+					
+					<CenteredMessage message="Defenses: To defend against SQL injection in this example, 
 					you could use parameterized queries instead of directly interpolating user inputs into the SQL statement. 
 					SQL injection attacks occur when untrusted user input is concatenated directly into a query, 
 					allowing malicious actors to manipulate or inject SQL code." />
