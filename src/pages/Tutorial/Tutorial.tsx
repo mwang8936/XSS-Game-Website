@@ -39,7 +39,7 @@ export default function Tutorial() {
 			<CenteredMessage
 				premessage="Task:"
 				message={
-					'You are in a coffee shop working on the latest CPEN 442 assignment. Suddenly you see Joe Biden working on his laptop.' +
+					'You are in a coffee shop working on the latest CPEN 442 assignment. Suddenly you see Joe Biden working on his laptop. ' +
 					'You take out your telescope from your backpack that you use for impromptu star gazing and aim it at his laptop.'
 				}
 			/>

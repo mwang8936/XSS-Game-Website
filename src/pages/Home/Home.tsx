@@ -8,7 +8,7 @@ import {
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '../components/Input';
-import sceneCelebration from '../../images/scene-celebration.png'
+import sceneCelebration from '../../images/scene-celebration.png';
 
 export const secret_keys = {
 	tutorial: 'firstkey',
@@ -26,8 +26,6 @@ export default function Home() {
 	const { level3_solved, set_level3_solved } = useLevel3SolvedContext();
 
 	const [key, setKey] = useState('');
-	set_level2_solved(true);
-	navigate('level3');
 
 	const onUnlock = () => {
 		if (key == secret_keys.tutorial && !tutorial_solved)
@@ -91,15 +89,13 @@ export default function Home() {
 					}}
 					hoverMessage="Complete level 2 to access level 3"
 				/>
-				{
-					level1_solved && level2_solved && level3_solved && (
-						<div className="flex flex-col items-center justify-center">
-							<img src={sceneCelebration} className='m-auto'/>
-							<b className="text-7xl">Congratulations!</b>
-							<h2 className="text-4xl">You have completed all levels!</h2>
-						</div>
-					)
-				}
+				{level1_solved && level2_solved && level3_solved && (
+					<div className="flex flex-col items-center justify-center">
+						<img src={sceneCelebration} className="m-auto" />
+						<b className="text-7xl">Congratulations!</b>
+						<h2 className="text-4xl">You have completed all levels!</h2>
+					</div>
+				)}
 			</div>
 		</>
 	);
