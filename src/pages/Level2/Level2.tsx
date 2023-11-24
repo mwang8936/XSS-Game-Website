@@ -13,7 +13,6 @@ import Accordion from '../components/Accoridon';
 import sql_img from '../../images/code/sql_injection.png';
 import initSqlJs from 'sql.js';
 import { Database } from 'sql.js';
-import Input from '../components/Input';
 
 export default function Level2() {
 	const [db, setDb] = useState<Database>();
@@ -57,7 +56,7 @@ export default function Level2() {
 	const handleLogin = (e: React.FormEvent) => {
 		e.preventDefault();
 		const results = exec(`SELECT * FROM users WHERE User = "${username}" AND Password = "${password}"`);
-		if(results?.length === 1) {
+		if(results !== undefined && results?.length >= 1) {
 			setLoginStatus('Login Successful!');
 			set_level2_solved(true);
 		}
@@ -150,7 +149,8 @@ export default function Level2() {
 			)}
 
 			<Accordion title="Show Code" content="" imageUrl={sql_img} />
-			<Accordion title="Hint1" content="Try to think of a way to make the SQL query condition always true." /* Write Hint here */ />
+			<Accordion title="Hint1" content="If the SQL query returns at least one row, the login will be successful. 
+			Try to think of a way to make the SQL query condition always true." /* Write Hint here */ />
 			<Accordion title="Hint2" content='You can use closing quotes " to end the quotes for username. Then you can put any SQL query after this. Finally you can add
 			a "--" to comment out the rest of the SQL query (AND Password = "${password}"). Putting it together: " {YOUR SQL ATTACK HERE} --' /* Write Hint here */ />
 		</div>
