@@ -6,6 +6,7 @@ interface InputProp {
 	label: string;
 	disabled: boolean;
 	hidden?: boolean;
+	textStyle?: React.CSSProperties;
 }
 
 export default function Input(prop: InputProp) {
@@ -32,6 +33,7 @@ export default function Input(prop: InputProp) {
 						prop.onEnter();
 					}
 				}}
+				style={prop.textStyle}
 			/>
 			<div hidden={prop.hidden}>
 				<button

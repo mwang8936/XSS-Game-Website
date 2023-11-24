@@ -1,0 +1,35 @@
+/* CodeEditor.css */
+
+.code-editor {
+	display: flex;
+	font-family: 'Courier New', Courier, monospace;
+  }
+  
+  .line-numbers {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	padding: 0 10px;
+	background-color: #f5f5f5;
+	border-right: 1px solid #ddd;
+	color: #666;
+	margin-top: 1ch;
+  }
+  
+  .line-numbers > div {
+	margin: -0.156ch;
+  }
+  
+  .code-input {
+	flex: 1;
+	padding: 10px;
+	font-size: 14px;
+	border: none;
+	outline: none;
+	background-color: #fff;
+	color: #333;
+	min-height: 0;
+  }
+  
+  /* Add your own syntax highlighting styles here */
+  
