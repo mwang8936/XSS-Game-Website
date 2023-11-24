@@ -26,6 +26,8 @@ export default function Home() {
 	const { level3_solved, set_level3_solved } = useLevel3SolvedContext();
 
 	const [key, setKey] = useState('');
+	set_level2_solved(true);
+	navigate('level3');
 
 	const onUnlock = () => {
 		if (key == secret_keys.tutorial && !tutorial_solved)

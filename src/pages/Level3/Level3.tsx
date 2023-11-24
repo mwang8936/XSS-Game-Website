@@ -47,12 +47,17 @@ export default function Level3() {
 	const { level2_solved } = useLevel2SolvedContext();
 	const { level3_solved } = useLevel3SolvedContext();
 	const [bankUrl, setBankUrl] = useState<string>(realWebsite);
+	const [fakeAccountNo, setFakeAccountNo] = useState<string>('');
+	const [fakeAmount, setFakeAmount] = useState<number>(0);
+	const [currentTotal, setCurrentTotal] = useState<number>(100);
 
 	const [isPart1Solved, setIsPart1Solved] = useState<boolean>(false);
 	const [isUrlCorrect, setIsUrlCorrect] = useState<boolean>(false);
 	const [isMethodCorrect, setIsMethodCorrect] = useState<boolean>(false);
 	const [isAttributeCorrect, setIsAttributeCorrect] = useState<boolean>(false);
 	const [isRecipientCorrect, setIsRecipientCorrect] = useState<boolean>(false);
+
+	const part2Ref = React.useRef<HTMLHeadingElement>(null);
 
 	const onPart1Submit = () => {
 		if (
@@ -64,6 +69,34 @@ export default function Level3() {
 			setIsPart1Solved(true);
 		}
 	};
+
+	const onBankTransferSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
+		if (fakeAmount > currentTotal) {
+			alert('You do not have enough money to transfer!');
+		} else if (fakeAccountNo === '123456789') {
+			alert('You cannot transfer money to your own account!');
+		} else {
+			setFakeAccountNo('');
+			setFakeAmount(0);
+			setCurrentTotal(currentTotal - fakeAmount);
+			alert(`You have successfully transferred $${fakeAmount} to the account ${fakeAccountNo}!`);
+		}
+	};
+
+	React.useEffect(() => {
+		if (level3_solved) {
+			setTimeout(() => {
+				setCurrentTotal((currentTotal) => currentTotal + 1000000);
+			}, 2000);
+		}
+	}, [level3_solved]);
+
+	React.useEffect(() => {
+		if (isPart1Solved) {
+			part2Ref.current?.scrollIntoView({ behavior: 'smooth' });
+		}
+	}, [isPart1Solved]);
 
 	return (
 		<Level3Part1SolvedContext.Provider
@@ -155,7 +188,7 @@ export default function Level3() {
 					<div style={{ marginLeft: '20px' }}>{`</body>`}</div>
 					<div style={{ marginLeft: '0px' }}>{`</html>`}</div>
 				</div>
-				<CenteredMessage message="Click Submit when you are done to move on to Part 2!" />
+				<CenteredMessage message={isPart1Solved ? "Solved! Move on to part 2!" : "Click Submit when you are done to move on to Part 2!"} />
 				<div className="flex flex-row items-center justify-center">
 					<button
 						className="flex flex-row justify-center items-center 
@@ -169,7 +202,7 @@ export default function Level3() {
 				<CenteredMessage message="You can clues on how you might craft a Cross-Site Request Forgery request form targeted at the Bank of CPEN442 by browsing the website." />
 
 				{/* Credit to https://codepen.io/kasonzhao/pen/yWwdpb */}
-				<div className="container">
+				<div className="browser-container">
 					<div className="fake-browser">
 						<header className="fake-browser-header">
 							<div className="action-btns">
@@ -219,6 +252,10 @@ export default function Level3() {
 
 								{/* buttons */}
 								<div className="w-3/12 flex justify-end">
+									<div className="mr-2">
+										<div>Total:</div>
+										<div className="text-green-500">${currentTotal}</div>
+									</div>
 									<img src={mallory} className="w-8 h-8 rounded-full" />
 									<div>
 										<span className="text-lg mx-4 hidden md:block">
@@ -234,17 +271,19 @@ export default function Level3() {
 										<h1 className="text-lg font-semibold text-center text-indigo-700 underline">
 											Transfer Money
 										</h1>
-										<form className="mt-6" action="/" method="POST">
+										<form className="mt-6" action="https://cpen442bank.com/transfer" method="POST">
 											<div className="mb-2">
 												<label
-													htmlFor="recipient"
+													htmlFor="recipientAccountNo"
 													className="block text-sm font-semibold text-gray-800">
 													Recipient Account Number (recipientAccountNo)
 												</label>
 												<input
-													id="recipient"
+													id="recipientAccountNo"
 													type="text"
 													className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+													value={fakeAccountNo}
+													onChange={(e) => setFakeAccountNo(e.target.value)}
 												/>
 											</div>
 											<div className="mb-2">
@@ -257,10 +296,12 @@ export default function Level3() {
 													id="amount"
 													type="number"
 													className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+													value={fakeAmount}
+													onChange={(e) => setFakeAmount(parseInt(e.target.value))}
 												/>
 											</div>
 											<div className="mt-6">
-												<button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
+												<button onClick={onBankTransferSubmit} className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
 													Send
 												</button>
 											</div>
@@ -293,7 +334,7 @@ export default function Level3() {
 					content="The website should submit a form to perform a POST request on the real bank website's transfer API endpoint to transfer money to our account. It also seems like we are missing the recipientAccountNo, which should be ours."
 				/>
 
-				<h1 className="part">Part 2</h1>
+				<h1 ref={part2Ref} className="part">Part 2</h1>
 
 				{isPart1Solved ? (
 					<>
@@ -328,7 +369,7 @@ export default function Level3() {
 									message="While there are many ways to mitigate a CSRF attack, CSRF attacks usually can only be mitigated server-side, meaning that data-sensitve websites such as online banking must be particularly cautious. The bank website could have required additional authentication before performing a transfer, for example requesting the user's password again, or some sort of multi-factor authentication.
 								It could also have implemented a SameSite=strict attribute on its session cookie so that the session cookie would not be able to be sent with requests from a different origin.
 								The most common way to mitigate these attacks, that most websites noawadays utilize is the usage of CSRF tokens. These tokens are unique, unpredictable values generated by the server and included in each form or request. The server verifies the token on the receiving end, ensuring that the request is legitimate.
-								Other mitigation techniques include checking the origin and referer headers of incoming requests, utilizing custom headers, and employing the Content Security Policy (CSP) header to control which domains are allowed to load resources on a web page. Each of these measures contributes to a comprehensive defense strategy against CSRF attacks."
+								Other mitigation techniques include checking the origin and referer headers of incoming requests, utilizing custom headers, and employing the Content Security Policy (CSP) header to control which domains are allowed to load resources on a web page. Each of these measures contributes to a systematic defense strategy against CSRF attacks."
 								/>
 								<CenteredMessage
 									message={'Key to solve level 3: ' + secret_keys.level3}

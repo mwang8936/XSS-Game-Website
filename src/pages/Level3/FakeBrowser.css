@@ -1,4 +1,4 @@
-.container {
+.browser-container {
 	display: flex;
 	justify-content: center;
 	padding: 30px;
@@ -6,7 +6,6 @@
   }
   
   .fake-browser {
-	width: 860px;
 	height: 500px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
