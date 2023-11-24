@@ -55,18 +55,24 @@ export default function Level3() {
 	const [isRecipientCorrect, setIsRecipientCorrect] = useState<boolean>(false);
 
 	const onPart1Submit = () => {
-		if (isUrlCorrect && isMethodCorrect && isAttributeCorrect && isRecipientCorrect) {
+		if (
+			isUrlCorrect &&
+			isMethodCorrect &&
+			isAttributeCorrect &&
+			isRecipientCorrect
+		) {
 			setIsPart1Solved(true);
 		}
-	}
+	};
 
 	return (
-		<Level3Part1SolvedContext.Provider value={{
-			setIsUrlCorrect,
-			setIsMethodCorrect,
-			setIsAttributeCorrect,
-			setIsRecipientCorrect,
-		}}>
+		<Level3Part1SolvedContext.Provider
+			value={{
+				setIsUrlCorrect,
+				setIsMethodCorrect,
+				setIsAttributeCorrect,
+				setIsRecipientCorrect,
+			}}>
 			<div className="items-center justify-center">
 				<Navbar
 					title="Level 3: Cross-Site Request Forgery"
@@ -75,41 +81,60 @@ export default function Level3() {
 					onBackBtnClick={() => {
 						navigate('/level2');
 					}}
-					onNextBtnClick={() => { }}
+					onNextBtnClick={() => {}}
 					onBackHoverMessage="Complete Level 1 to unlock level 2"
 					onNextHoverMessage="No more levels"
 				/>
 				<div className="flex justify-center items-center pt-5 pb-2 w-[80%] mx-auto text-xl ">
 					<span>
 						<div className="font-bold">Task: </div>
-						You are chatting with some random stranger on a vulnerable and unsafe chat room app on the internet. He tells you he has a lot of money. How can you find a way to steal his money?
+						You are chatting with some random stranger on a vulnerable and
+						unsafe chat room app on the internet. He tells you he has a lot of
+						money. How can you find a way to steal his money?
 					</span>
 				</div>
 
-				<h1 className="part">
-					Part 1
-				</h1>
+				<h1 className="part">Part 1</h1>
 
 				<div className="flex justify-center items-center pt-5 pb-2 w-[80%] mx-auto text-xl ">
 					<span>
-						You have a website at <b>cpen442bankgiveaway.com</b> that you have crafted to perform <b>Cross-Site Request Forgery</b> requests. You just need to fill in a few last details into your source code.
+						You have a website at <b>cpen442bankgiveaway.com</b> that you have
+						crafted to perform <b>Cross-Site Request Forgery</b> requests. You
+						just need to fill in a few last details into your source code.
 					</span>
 				</div>
 				<CenteredMessage message="" />
 
-				<div className="flex flex-col code-editor" style={{ width: '65vw', margin: 'auto', borderWidth: '1px 1px 0px 1px', borderStyle: 'solid', borderColor: 'black', fontFamily: 'Courier New, monospace', fontSize: '1rem', overflow: 'auto', textAlign: 'center' }}>
+				<div
+					className="flex flex-col code-editor"
+					style={{
+						width: '65vw',
+						margin: 'auto',
+						borderWidth: '1px 1px 0px 1px',
+						borderStyle: 'solid',
+						borderColor: 'black',
+						fontFamily: 'Courier New, monospace',
+						fontSize: '1rem',
+						overflow: 'auto',
+						textAlign: 'center',
+					}}>
 					index.html
 				</div>
-				<div className="flex flex-col code-editor" style={{ width: '65vw', margin: 'auto', border: '1px solid black', fontFamily: 'Courier New, monospace', fontSize: '1rem', overflow: 'auto' }}>
-					<div>
-						{`<html>`}
-					</div>
-					<div style={{ marginLeft: '20px' }}>
-						{`<body>`}
-					</div>
+				<div
+					className="flex flex-col code-editor"
+					style={{
+						width: '65vw',
+						margin: 'auto',
+						border: '1px solid black',
+						fontFamily: 'Courier New, monospace',
+						fontSize: '1rem',
+						overflow: 'auto',
+					}}>
+					<div>{`<html>`}</div>
+					<div style={{ marginLeft: '20px' }}>{`<body>`}</div>
 					<div style={{ marginLeft: '40px' }}>
 						{`<form action="https://`}
-						<FillBlank target={realWebsite + "/transfer"} />
+						<FillBlank target={realWebsite + '/transfer'} />
 						{`" method=`}
 						<FillBlank target="POST" />
 						{`>`}
@@ -121,24 +146,14 @@ export default function Level3() {
 						<FillBlank target="123456789" />
 						{`" amount="1000000"/>`}
 					</div>
-					<div style={{ marginLeft: '40px' }}>
-						{`</form>`}
-					</div>
-					<div style={{ marginLeft: '40px' }}>
-						{`<script>`}
-					</div>
+					<div style={{ marginLeft: '40px' }}>{`</form>`}</div>
+					<div style={{ marginLeft: '40px' }}>{`<script>`}</div>
 					<div style={{ marginLeft: '60px' }}>
 						{`document.forms[0].submit();`}
 					</div>
-					<div style={{ marginLeft: '40px' }}>
-						{`</script>`}
-					</div>
-					<div style={{ marginLeft: '20px' }}>
-						{`</body>`}
-					</div>
-					<div style={{ marginLeft: '0px' }}>
-						{`</html>`}
-					</div>
+					<div style={{ marginLeft: '40px' }}>{`</script>`}</div>
+					<div style={{ marginLeft: '20px' }}>{`</body>`}</div>
+					<div style={{ marginLeft: '0px' }}>{`</html>`}</div>
 				</div>
 				<CenteredMessage message="Click Submit when you are done to move on to Part 2!" />
 				<div className="flex flex-row items-center justify-center">
@@ -146,8 +161,7 @@ export default function Level3() {
 						className="flex flex-row justify-center items-center 
 					bg-blue-500 hover:bg-blue-700 text-white disabled:bg-gray-500
 					font-bold py-2 px-4 m-3 rounded w-auto h-auto group"
-						onClick={onPart1Submit}
-					>
+						onClick={onPart1Submit}>
 						Submit
 					</button>
 				</div>
@@ -174,17 +188,17 @@ export default function Level3() {
 							<header className="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-2">
 								<div className="w-1/12 flex items-center mr-12">
 									<div>CPEN442 Bank</div>
-									<img src={banklogo} className="w-8" alt='logo' />
+									<img src={banklogo} className="w-8" alt="logo" />
 								</div>
 
 								{/* navigation */}
 								<nav className="nav font-semibold text-lg">
 									<ul className="flex items-center">
-										<li onClick={
-											() => {
+										<li
+											onClick={() => {
 												setBankUrl(`${realWebsite}`);
-											}
-										} className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
+											}}
+											className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
 											<div>Home</div>
 										</li>
 										<li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer">
@@ -193,11 +207,11 @@ export default function Level3() {
 										<li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer">
 											<div>Final Exam</div>
 										</li>
-										<li onClick={
-											() => {
+										<li
+											onClick={() => {
 												setBankUrl(`${realWebsite}/transfer`);
-											}
-										} className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer">
+											}}
+											className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer">
 											<div>Transfer Money</div>
 										</li>
 									</ul>
@@ -210,126 +224,145 @@ export default function Level3() {
 										<span className="text-lg mx-4 hidden md:block">
 											Mallory Atak
 										</span>
-										<div className='text-xs'>
-											Account No: 123456789
-										</div>
+										<div className="text-xs">Account No: 123456789</div>
 									</div>
-
 								</div>
 							</header>
-							{
-								bankUrl === `${realWebsite}/transfer` ?
-									(
-										<div className="relative flex flex-col justify-center my-8">
-											<div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-indigo-600 lg:max-w-xl">
-												<h1 className="text-lg font-semibold text-center text-indigo-700 underline">
-													Transfer Money
-												</h1>
-												<form className="mt-6" action="/" method="POST">
-													<div className="mb-2">
-														<label
-															htmlFor="recipient"
-															className="block text-sm font-semibold text-gray-800"
-														>
-															Recipient Account Number (recipientAccountNo)
-														</label>
-														<input
-															id="recipient"
-															type="text"
-															className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-														/>
-													</div>
-													<div className="mb-2">
-														<label
-															htmlFor="amount"
-															className="block text-sm font-semibold text-gray-800"
-														>
-															Amount
-														</label>
-														<input
-															id="amount"
-															type="number"
-															className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-														/>
-													</div>
-													<div className="mt-6">
-														<button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
-															Send
-														</button>
-													</div>
-												</form>
-
+							{bankUrl === `${realWebsite}/transfer` ? (
+								<div className="relative flex flex-col justify-center my-8">
+									<div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-indigo-600 lg:max-w-xl">
+										<h1 className="text-lg font-semibold text-center text-indigo-700 underline">
+											Transfer Money
+										</h1>
+										<form className="mt-6" action="/" method="POST">
+											<div className="mb-2">
+												<label
+													htmlFor="recipient"
+													className="block text-sm font-semibold text-gray-800">
+													Recipient Account Number (recipientAccountNo)
+												</label>
+												<input
+													id="recipient"
+													type="text"
+													className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+												/>
 											</div>
-										</div>
-									) : <div className="flex flex-col items-center justify-center content-center" style={{ height: '82%' }}>
-										<img src={banklogo} />
-										<h1 className="text-lg font-semibold text-center text-indigo-700">
-											Welcome to
-										</h1>
-										<h1 className="text-8xl font-bold text-center text-indigo-700">
-											CPEN442 Bank
-										</h1>
+											<div className="mb-2">
+												<label
+													htmlFor="amount"
+													className="block text-sm font-semibold text-gray-800">
+													Amount
+												</label>
+												<input
+													id="amount"
+													type="number"
+													className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+												/>
+											</div>
+											<div className="mt-6">
+												<button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
+													Send
+												</button>
+											</div>
+										</form>
 									</div>
-
-							}
+								</div>
+							) : (
+								<div
+									className="flex flex-col items-center justify-center content-center"
+									style={{ height: '82%' }}>
+									<img src={banklogo} />
+									<h1 className="text-lg font-semibold text-center text-indigo-700">
+										Welcome to
+									</h1>
+									<h1 className="text-8xl font-bold text-center text-indigo-700">
+										CPEN442 Bank
+									</h1>
+								</div>
+							)}
 						</section>
 					</div>
 				</div>
 
-				<Accordion title="Hint 1" content="Look at the website and on the tab 'Transfer Money'. Our form should function similar to that one."/>
-				<Accordion title="Hint 2" content="The website should submit a form to perform a POST request on the real bank website's transfer API endpoint to transfer money to our account. It also seems like we are missing the recipientAccountNo, which should be ours."/>
+				<Accordion
+					title="Hint 1"
+					content="Look at the website and on the tab 'Transfer Money'. Our form should function similar to that one."
+				/>
+				<Accordion
+					title="Hint 2"
+					content="The website should submit a form to perform a POST request on the real bank website's transfer API endpoint to transfer money to our account. It also seems like we are missing the recipientAccountNo, which should be ours."
+				/>
 
-				<h1 className="part">
-					Part 2
-				</h1>
+				<h1 className="part">Part 2</h1>
 
-				{
-					isPart1Solved ? (<>
+				{isPart1Solved ? (
+					<>
 						<CenteredMessage message="Nice! You have successfully crafted a Cross-Site Request Forgery request form and installed it on your website. Now you need to trick the stranger into submitting the form." />
 						<ChatRoom
 							initialMessages={[
 								{ id: 1, content: 'Hello', sender: 'Bob' },
-								{ id: 2, content: 'Hi, how much money do you have and where do you have it stored?', sender: 'You' },
+								{
+									id: 2,
+									content:
+										'Hi, how much money do you have and where do you have it stored?',
+									sender: 'You',
+								},
 								{ id: 3, content: 'I have a lot money', sender: 'Bob' },
-								{ id: 4, content: 'I store it in my bank of cpen442', sender: 'Bob' },
+								{
+									id: 4,
+									content: 'I store it in my bank of cpen442',
+									sender: 'Bob',
+								},
 							]}
 						/>
 
 						{level3_solved && (
 							<>
-								<CenteredMessage message="Solved: This level was an example of both Cross-Site Request Forgery and Cross-Site Scripting. The stranger was tricked into clicking on a link that directed him to your website, which then automatically submitted a form to transfer money to your account.
-								The reason why CSRF would work in this case is because the stranger was already logged into the bank website, so the website would automatically authenticate the request with his session cookie (and his session cookie did not have a Same-Site attribute either). And since the legitimate bank website did not request for any additional authentication, the request would be accepted." />
-								<CenteredMessage message="Defenses: While there are many ways to mitigate a CSRF attack, CSRF attacks usually can only be mitigated server-side, meaning that data-sensitve websites such as online banking must be particularly cautious. The bank website could have required additional authentication before performing a transfer, for example requesting the user's password again, or some sort of multi-factor authentication.
+								<CenteredMessage
+									premessage="Solved:"
+									message="This level was an example of both Cross-Site Request Forgery and Cross-Site Scripting. The stranger was tricked into clicking on a link that directed him to your website, which then automatically submitted a form to transfer money to your account.
+								The reason why CSRF would work in this case is because the stranger was already logged into the bank website, so the website would automatically authenticate the request with his session cookie (and his session cookie did not have a Same-Site attribute either). And since the legitimate bank website did not request for any additional authentication, the request would be accepted."
+								/>
+								<CenteredMessage
+									premessage="Defenses:"
+									message="While there are many ways to mitigate a CSRF attack, CSRF attacks usually can only be mitigated server-side, meaning that data-sensitve websites such as online banking must be particularly cautious. The bank website could have required additional authentication before performing a transfer, for example requesting the user's password again, or some sort of multi-factor authentication.
 								It could also have implemented a SameSite=strict attribute on its session cookie so that the session cookie would not be able to be sent with requests from a different origin.
 								The most common way to mitigate these attacks, that most websites noawadays utilize is the usage of CSRF tokens. These tokens are unique, unpredictable values generated by the server and included in each form or request. The server verifies the token on the receiving end, ensuring that the request is legitimate.
-								Other mitigation techniques include checking the origin and referer headers of incoming requests, utilizing custom headers, and employing the Content Security Policy (CSP) header to control which domains are allowed to load resources on a web page. Each of these measures contributes to a comprehensive defense strategy against CSRF attacks." />
+								Other mitigation techniques include checking the origin and referer headers of incoming requests, utilizing custom headers, and employing the Content Security Policy (CSP) header to control which domains are allowed to load resources on a web page. Each of these measures contributes to a comprehensive defense strategy against CSRF attacks."
+								/>
 								<CenteredMessage
 									message={'Key to solve level 3: ' + secret_keys.level3}
 								/>
-								<img src={sceneCelebration} className='m-auto'/>
+								<img src={sceneCelebration} className="m-auto" />
 								<div className="flex justify-center items-center pt-5 pb-2 w-[80%] mx-auto text-5xl ">
-									<b>
-										Congratulations!
-									</b>
+									<b>Congratulations!</b>
 								</div>
 							</>
 						)}
+					</>
+				) : (
+					<div className="flex flex-col items-center justify-center content-center my-10">
+						<img src={shield} />
+						<div className="text-5xl font-bold text-center text-black-700">
+							Locked
+						</div>
+					</div>
+				)}
 
-					</>) :
-						(<div className="flex flex-col items-center justify-center content-center my-10">
-							<img src={shield} />
-							<div className="text-5xl font-bold text-center text-black-700">
-								Locked
-							</div>
-						</div>)
-				}
-
-				<Accordion title="Hint 1" content="Remember the first level? We should enter something in the chat similar to that."/>
-				<Accordion title="Hint 2" content="We want to direct the stranger to go to our website at cpen442bankgiveaway.com"/>
-				<Accordion title="Hint 3" content='Would something like "<a href="cpen442bankgiveaway.com">Click here for more money!</a>" work?'/>
+				<Accordion
+					title="Hint 1"
+					content="Remember the first level? We should enter something in the chat similar to that."
+				/>
+				<Accordion
+					title="Hint 2"
+					content="We want to direct the stranger to go to our website at cpen442bankgiveaway.com"
+				/>
+				<Accordion
+					title="Hint 3"
+					content='Would something like "<a href="cpen442bankgiveaway.com">Click here for more money!</a>" work?'
+				/>
 			</div>
 		</Level3Part1SolvedContext.Provider>
-
 	);
 }
 
@@ -378,6 +411,11 @@ const FillBlank: React.FC<FillBlankProps> = (props) => {
 	};
 
 	return (
-		<input className="code-input" value={code} onChange={handleCodeChange} style={style} />
+		<input
+			className="code-input"
+			value={code}
+			onChange={handleCodeChange}
+			style={style}
+		/>
 	);
-}
+};

@@ -36,8 +36,8 @@ export default function Tutorial() {
 				onBackHoverMessage="No previous levels"
 				onNextHoverMessage="Complete Tutorial to unlock Level 1"
 			/>
-			<CenteredMessage message="Task:" />
 			<CenteredMessage
+				premessage="Task:"
 				message={
 					'You are in a coffee shop working on the latest CPEN 442 assignment. Suddenly you see Joe Biden working on his laptop.' +
 					'You take out your telescope from your backpack that you use for impromptu star gazing and aim it at his laptop.'
@@ -85,15 +85,17 @@ export default function Tutorial() {
 			{tutorial_solved && (
 				<>
 					<CenteredMessage
+						premessage="Solved:"
 						message={
-							'Solved: This was an example of shoulder-surfing, which is a common example of an ' +
+							'This was an example of shoulder-surfing, which is a common example of an ' +
 							'optical side-channel: where information is leaked visually. Remember that an adversary will always take the ' +
 							"easiest attack approach for THEM, sometimes they don't need fancy coding skills to hack you."
 						}
 					/>
 					<CenteredMessage
+						premessage="Defenses:"
 						message={
-							"Defenses: Don't be the president and don't type your password in public where anyone " +
+							"Don't be the president and don't type your password in public where anyone " +
 							"can see it. Having the password field replaced with astericks '*' will also make it more difficult for someone " +
 							'to peek at your screen and steal your passwords.'
 						}

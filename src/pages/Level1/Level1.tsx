@@ -46,8 +46,9 @@ export default function Level1() {
 			/>
 
 			<CenteredMessage
+				premessage="Task:"
 				message={
-					'Task: You are an attacker performing an XSS attack. You have learned that this website stores ' +
+					'You are an attacker performing an XSS attack. You have learned that this website stores ' +
 					'the username and password of their users in cookies (Very Bad Practice). Use the input field underneath to display an alert ' +
 					'and find the username and password for this level.'
 				}
@@ -114,8 +115,9 @@ export default function Level1() {
 			{level1_solved && (
 				<>
 					<CenteredMessage
+						premessage="Solved:"
 						message={
-							'Solved: This attack works, because the frontend (website) allowed you to input your own data ' +
+							'This attack works, because the frontend (website) allowed you to input your own data ' +
 							"and you were able to inject you're own code (HTML/JavaScript) into the web application. " +
 							'In this example, your attack is only affecting yourself, however, typically, XSS attacks work in 2 ways. ' +
 							'(1) Stored XSS Attacks: An adversary can inject their script through an input to a website and that input is stored ' +
@@ -127,8 +129,9 @@ export default function Level1() {
 						}
 					/>
 					<CenteredMessage
+						premessage="Defenses:"
 						message={
-							'Defenses: There are multiple ways to prevent an attack like this. (1) Input mediation: You can ' +
+							'There are multiple ways to prevent an attack like this. (1) Input mediation: You can ' +
 							'always check the inputs being supplied (using code) that they are not malicious. This can be done by filtering out ' +
 							"specific characters like ',<,; that are often used in attacks. This mediation can be done on the client-side (website) " +
 							'but definitely needs to be implemented on the server-side to avoid an attacker submitting their script straight to the web ' +
