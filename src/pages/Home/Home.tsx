@@ -8,6 +8,7 @@ import {
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '../components/Input';
+import sceneCelebration from '../../images/scene-celebration.png'
 
 export const secret_keys = {
 	tutorial: 'firstkey',
@@ -80,7 +81,7 @@ export default function Home() {
 					hoverMessage="Complete level 1 to access level 2"
 				/>
 				<Level
-					name="Level 3: ???"
+					name="Level 3: CSRF Attack"
 					disabled={!level2_solved && !level3_solved}
 					solved={level3_solved}
 					navigate={() => {
@@ -88,6 +89,15 @@ export default function Home() {
 					}}
 					hoverMessage="Complete level 2 to access level 3"
 				/>
+				{
+					level1_solved && level2_solved && level3_solved && (
+						<div className="flex flex-col items-center justify-center">
+							<img src={sceneCelebration} className='m-auto'/>
+							<b className="text-7xl">Congratulations!</b>
+							<h2 className="text-4xl">You have completed all levels!</h2>
+						</div>
+					)
+				}
 			</div>
 		</>
 	);
